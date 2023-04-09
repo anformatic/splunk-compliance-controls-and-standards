@@ -1,0 +1,7 @@
+'''' CSC 16: Actively manage the lifecycle of system and application accounts – their creation, use, dormancy, deletion – in order to minimize opportunities for attackers to leverage them ''''
+RELATED Standards:
+# NIST 800-53: AC-2, AC-3, AC-7, AC-11, CA-7, SI-4
+# PCI DSS 3.0: 7.1-7.3, 8.7-8.8
+# HIPAA: 164.308(a)(4), 164.312(a)(1)/(d)
+# NERC CIP v5: CIP-005-5 R2, CIP-007-5 R4
+# ISO 27002:2013: A.9.1.1, A.9.2.1-A.9.2.6, A.9.4.1-A.9.4.2 
