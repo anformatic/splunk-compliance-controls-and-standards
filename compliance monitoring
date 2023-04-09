@@ -7,6 +7,9 @@ RELATED Standards:
 # NERC CIP v5: CIP-005-5 R2, CIP-007-5 R4
 # ISO 27002:2013: A.9.1.1, A.9.2.1-A.9.2.6, A.9.4.1-A.9.4.2 
 
+-------------AD Account Lockouts-----------------
+index="windows-server-security" EventCode=4740 | stats latest(_time) AS time by user | sort time | eval time=strftime(time,"%d-%b-%y %I:%M:%S %p") |stats count(time) by user |  sort -count
+
 
 
 ** Boundary Defense **
