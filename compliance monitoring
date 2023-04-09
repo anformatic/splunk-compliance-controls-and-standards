@@ -35,8 +35,17 @@ index="*" | stats  dc(dest_port) as num_dest_port dc(dest_ip) as num_dest_ip by 
 
 
 -------------spike in/of Destinations-----------------
-index="*" | stats  dc(dest_ip) as count by src_ip _time | eval maxtime=now()  | stats count as num_data_samples max(eval(if(_time >= relative_time(maxtime, "-1d@d"), 'count', null))) as "count" avg(eval(if(_time<relative_time(maxtime,"-1d@d"),'count',null))) as avg stdev(eval(if(_time<relative_time(maxtime,"-1d@d"),'count',null))) as stdev by "src_ip" 
-| eval lowerBound=(avg-stdev*2), upperBound=(avg+stdev*2) | eval isOutlier=if(('count' > upperBound) AND num_data_samples >=7, 1, 0) | where isOutlier=1 | stats count
+index="windows*"  | stats  dc(dest_ip) as count by src_ip _time | eval maxtime=now()  | stats count as num_data_samples max(eval(if(_time >= relative_time(maxtime, "-1d@d"), 'count', null))) as "count" avg(eval(if(_time<relative_time(maxtime,"-1d@d"),'count',null))) as avg stdev(eval(if(_time<relative_time(maxtime,"-1d@d"),'count',null))) as stdev by "src_ip" 
+| eval lowerBound=(avg-stdev*2), upper_bound=(avg+stdev*2)  | eval isOutlier=if(('count' > upper_bound) AND num_data_samples >=7, 1, 0) | where isOutlier=1 
+| table src_ip, count, avg, upper_bound
+
+
+-------------spike in DNS Traffic-----------------
+index="windows*" dest_port=53 |stats sum(bytes_out) as bytes_out by src_ip _time | eventstats max(_time) as maxtime avg(bytes_out) as avg_bytes_out stdev(bytes_out) as stdev_bytes_out 
+| eventstats count as events avg(eval(if(_time < relative_time(maxtime, "@d"),bytes_out,null))) as per_source_avg_bytes_out stdev(eval(if(_time < relative_time(maxtime, "@d"),bytes_out,null))) as per_source_stdev_bytes_out by src_ip 
+| where events >=4 AND bytes_out > avg_bytes_out + 3 * stdev_bytes_out AND bytes_out > per_source_avg_bytes_out + 3 * per_source_stdev_bytes_out AND _time >= relative_time(maxtime, "@d") 
+| eval stdev_from_org_avg = round(abs(bytes_out - avg_bytes_out) / stdev_bytes_out,2), stdev_from_host_avg = round(abs(bytes_out - per_source_avg_bytes_out) / per_source_stdev_bytes_out,2) 
+| table src_ip, bytes_out, avg_bytes_out, stdev_from_host_avg, events
 
 
 
