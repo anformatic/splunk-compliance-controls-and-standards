@@ -34,6 +34,11 @@ index="*" tag=network tag=communicate | streamstats current=f last(_time) as nex
 index="*" | stats  dc(dest_port) as num_dest_port dc(dest_ip) as num_dest_ip by src_ip | where num_dest_port > 100 OR num_dest_ip > 100 | stats count
 
 
+-------------spike in/of Destinations-----------------
+index="*" | stats  dc(dest_ip) as count by src_ip _time | eval maxtime=now()  | stats count as num_data_samples max(eval(if(_time >= relative_time(maxtime, "-1d@d"), 'count', null))) as "count" avg(eval(if(_time<relative_time(maxtime,"-1d@d"),'count',null))) as avg stdev(eval(if(_time<relative_time(maxtime,"-1d@d"),'count',null))) as stdev by "src_ip" 
+| eval lowerBound=(avg-stdev*2), upperBound=(avg+stdev*2) | eval isOutlier=if(('count' > upperBound) AND num_data_samples >=7, 1, 0) | where isOutlier=1 | stats count
+
+
 
 
 ** Malware Defenses **
