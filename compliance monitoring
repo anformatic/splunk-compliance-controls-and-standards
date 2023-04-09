@@ -26,6 +26,10 @@ index="*" type=attack |stats count by attack_type
 -------------Intrusion Detection - Attack Severity over Time-----------------
 index="*" type=attack severity_level="*" | timechart minspan=10m count by severity_level
 
+-------------suspected host communication-----------------
+index="*" tag=network tag=communicate | streamstats current=f last(_time) as next_time by dest | eval gap = next_time - _time | stats count, avg(gap) as avg_gap, var(gap) as var_gap by dest src 
+| search avg_gap<50 count>500 | stats dc(src)
+
 
 
 ** Malware Defenses **
