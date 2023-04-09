@@ -48,6 +48,11 @@ index="windows*" dest_port=53 |stats sum(bytes_out) as bytes_out by src_ip _time
 | table src_ip, bytes_out, avg_bytes_out, stdev_from_host_avg, events
 
 
+-------------Hosts Communicating With the Greatest # of Destinations Over SMB-----------------
+index="*" dest_port=445 OR dest_port=139 |stats dc(dest_ip) as count by src_ip | rename src_ip as src | sort - count
+
+
+
 
 
 ** Malware Defenses **
