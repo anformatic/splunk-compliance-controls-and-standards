@@ -23,6 +23,10 @@ RELATED Standard:
 -------------Intrusion Detection - Attacks-----------------
 index="*" type=attack |stats count by attack_type
 
+-------------Intrusion Detection - Attack Severity over Time-----------------
+index="*" type=attack severity_level="*" | timechart minspan=10m count by severity_level
+
+
 
 ** Malware Defenses **
 ''' CSC 8: Control the installation, spread, and execution of malicious code at multiple points in the enterprise, while optimizing the use of automation to enable rapid updating of defense, data gathering, and corrective action '''
