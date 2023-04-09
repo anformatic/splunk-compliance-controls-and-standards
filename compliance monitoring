@@ -36,3 +36,7 @@ RELATED Standard:
 # HIPAA: 164.308(a)(5)(ii)(B)
 # NERC CIP v5: CIP-007-5 R3
 # ISO 27002:2013: A.12.2.1
+
+-------------action against malware-----------------
+index="*" "malware" severity=high |stats count by srcip,dstip,action,attack,msg
+
