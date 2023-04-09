@@ -10,7 +10,7 @@ RELATED Standards:
 -------------AD Account Lockouts-----------------
 index="windows-server-security" EventCode=4740 | stats latest(_time) AS time by user | sort time | eval time=strftime(time,"%d-%b-%y %I:%M:%S %p") |stats count(time) by user |  sort -count
 
-
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 ** Boundary Defense **
 ''' CSC 12: Detect, prevent, and correct the flow of information transferring networks of different trust levels with a focus on security-damaging data '''
@@ -52,7 +52,7 @@ index="windows*" dest_port=53 |stats sum(bytes_out) as bytes_out by src_ip _time
 index="*" dest_port=445 OR dest_port=139 |stats dc(dest_ip) as count by src_ip | rename src_ip as src | sort - count
 
 
-
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 
 ** Malware Defenses **
