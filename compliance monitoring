@@ -1,3 +1,4 @@
+** Account Monitoring and Control **
 '''' CSC 16: Actively manage the lifecycle of system and application accounts – their creation, use, dormancy, deletion – in order to minimize opportunities for attackers to leverage them ''''
 RELATED Standards:
 # NIST 800-53: AC-2, AC-3, AC-7, AC-11, CA-7, SI-4
@@ -5,3 +6,23 @@ RELATED Standards:
 # HIPAA: 164.308(a)(4), 164.312(a)(1)/(d)
 # NERC CIP v5: CIP-005-5 R2, CIP-007-5 R4
 # ISO 27002:2013: A.9.1.1, A.9.2.1-A.9.2.6, A.9.4.1-A.9.4.2 
+
+
+
+** Boundary Defense **
+''' CSC 12: Detect, prevent, and correct the flow of information transferring networks of different trust levels with a focus on security-damaging data '''
+RELATED Standard:
+# NIST 800-53: AC-4, AC-17, AC-20, CA-3, CA-7, CA-9, SC-7, SI-4
+# PCI DSS 3.0: 1.2-1.3, 10.8, 11.4
+# NERC CIP v5: CIP-005-5 R1, CIP-005-5 R2, CIP-007-5 R4
+# ISO 27002:2013: A.9.1.2, A.12.4.1, A.12.7.1, A.13.1.1, A.13.1.3, A.13.2.3
+
+
+** Malware Defenses **
+''' CSC 8: Control the installation, spread, and execution of malicious code at multiple points in the enterprise, while optimizing the use of automation to enable rapid updating of defense, data gathering, and corrective action '''
+RELATED Standard:
+# NIST 800-53: CA-7, SI-3, SI-4
+# PCI DSS 3.0: Requirement 5
+# HIPAA: 164.308(a)(5)(ii)(B)
+# NERC CIP v5: CIP-007-5 R3
+# ISO 27002:2013: A.12.2.1
